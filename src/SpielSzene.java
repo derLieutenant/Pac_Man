@@ -1,24 +1,26 @@
 package src;
 
-import src.Szene;
-import src.TastaturManger;
-
 public class SpielSzene extends Szene {
 
     protected final int KAESTCHENGROESSE = 32;
     protected final int BREITE = 28 * KAESTCHENGROESSE, HOEHE = 31 * KAESTCHENGROESSE + 120;
-                            //Spielfeld = 17*19 (mit Rand 28*31) ; 100px oben und 20 unten frei für Score etc.
+                            //Spielfeld = 26*29 (mit Rand 28*31) ; 100px oben und 20 unten frei für Score etc.
 
-    public SpielSzene(String derTitel, TastaturManger derTastaturManager, Oberflaeche dieOberflaeche) {
-        super(derTitel, derTastaturManager);
+    public SpielSzene(String derTitel, Steuerung dieSteuerung, Oberflaeche dieOberflaeche) {
+        super(derTitel, dieSteuerung);
         this.dieOberflaeche = dieOberflaeche;
 
         setSize(BREITE, HOEHE);
         setLocationRelativeTo(null);
         setLayout(null);
 
+        dieSteuerung.starteSpiel();
 
         this.setVisible(true);
+    }
+
+    public void zeichnePacMan(int x, int y) {
+        
     }
 
 

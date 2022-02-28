@@ -17,6 +17,10 @@ public class TastaturManger implements KeyListener {
         System.out.println(e.getKeyCode());
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE -> dieSteuerung.beende();       //das ist einfach nur eine andere Schreibweise für switch caseses (Lambda Schreibweise)
+            case KeyEvent.VK_W -> dieSteuerung.bewegePacMan('O');
+            case KeyEvent.VK_D -> dieSteuerung.bewegePacMan('R');
+            case KeyEvent.VK_S -> dieSteuerung.bewegePacMan('U');
+            case KeyEvent.VK_A -> dieSteuerung.bewegePacMan('L');
         }
     }
     @Override

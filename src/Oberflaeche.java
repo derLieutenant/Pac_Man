@@ -7,7 +7,8 @@ public class Oberflaeche {
     private final Steuerung dieSteuerung;
 
     private Szene aktuelleSzene;
-    Szene menuFenster, spielFenseter;
+    MenuSzene menuFenster;
+    SpielSzene spielFenseter;
 
     public Oberflaeche(TastaturManger derTastaturmanager, Steuerung dieSteuerung) {
         this.dieSteuerung = dieSteuerung;
@@ -18,13 +19,19 @@ public class Oberflaeche {
 
     }
 
+    public void zeichnePacMan(int x, int y) {
+        if (spielFenseter != null) {
+            spielFenseter.zeichnePacMan(x, y);
+        }
+    }
+
     public void wechselSzene(int neueSzene) {
         switch (neueSzene) {
             case 0:
-                menuFenster = new MenuSzene("-MENU-", derTastaturmanager, this);
+                menuFenster = new MenuSzene("-MENU-",dieSteuerung, this);
                 break;
             case 1:
-                spielFenseter = new SpielSzene("-PACMAN-", derTastaturmanager, this);
+                spielFenseter = new SpielSzene("-PACMAN-", dieSteuerung, this);
                 break;
         }
 

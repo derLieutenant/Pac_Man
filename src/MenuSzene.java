@@ -12,8 +12,8 @@ public class MenuSzene extends Szene implements ActionListener {
     protected final int BREITE = 500, HOEHE = 400, X = 200, Y = 200;
     protected Button[] dieButtons = new Button[3];
 
-    public MenuSzene(String derTitel, TastaturManger derTastaturManager, Oberflaeche dieOberflaeche) {
-        super(derTitel, derTastaturManager);
+    public MenuSzene(String derTitel, Steuerung dieSteuerung, Oberflaeche dieOberflaeche) {
+        super(derTitel, dieSteuerung);
         this.dieOberflaeche = dieOberflaeche;
 
         setBounds(X, Y, BREITE, HOEHE);

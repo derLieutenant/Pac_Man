@@ -12,6 +12,6 @@ public class TimerAufruf extends TimerTask {
 
     @Override
     public void run() {
-        dieSteuerung.aktualisieren();
+         dieSteuerung.aktualisieren();
     }
 }
