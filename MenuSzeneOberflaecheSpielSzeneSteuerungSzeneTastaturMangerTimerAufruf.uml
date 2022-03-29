@@ -1,0 +1,106 @@
+﻿[Files]
+File0=E:\Schule\CT IT Br\Projekt\Pac_Man-main\Pac_Man-main\src\MenuSzene.java
+File1=E:\Schule\CT IT Br\Projekt\Pac_Man-main\Pac_Man-main\src\Oberflaeche.java
+File2=E:\Schule\CT IT Br\Projekt\Pac_Man-main\Pac_Man-main\src\SpielSzene.java
+File3=E:\Schule\CT IT Br\Projekt\Pac_Man-main\Pac_Man-main\src\Steuerung.java
+File4=E:\Schule\CT IT Br\Projekt\Pac_Man-main\Pac_Man-main\src\Szene.java
+File5=E:\Schule\CT IT Br\Projekt\Pac_Man-main\Pac_Man-main\src\TastaturManger.java
+File6=E:\Schule\CT IT Br\Projekt\Pac_Man-main\Pac_Man-main\src\TimerAufruf.java
+
+[Box:  - src.MenuSzene]
+X=362
+Y=737
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Box:  - src.Oberflaeche]
+X=350
+Y=40
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Box:  - src.SpielSzene]
+X=987
+Y=737
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Box:  - src.Steuerung]
+X=1071
+Y=315
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Box:  - src.Szene]
+X=689
+Y=315
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Box:  - src.TastaturManger]
+X=20
+Y=737
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Box:  - src.TimerAufruf]
+X=1606
+Y=737
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Diagram]
+comments=0
+OffsetX=341
+OffsetY=0
+Visibility=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+ShowConnections=0
+Fontname=Segoe UI
+Fontsize=12
+ShowObjectDiagram=0
+
+[Connections]
+V0=src.MenuSzene#src.Szene#Inheritends####0#0#0###0#0
+V1=src.Oberflaeche#src.TastaturManger#AssociationDirected####0#0#0###0#0
+V2=src.Oberflaeche#src.Steuerung#AssociationBidirectional####0#0#0###0#0
+V3=src.Oberflaeche#src.Szene#AssociationBidirectional####0#0#0###0#0
+V4=src.Oberflaeche#src.MenuSzene#AssociationDirected####0#0#0###0#0
+V5=src.Oberflaeche#src.SpielSzene#AssociationDirected####0#0#0###0#0
+V6=src.SpielSzene#src.Szene#Inheritends####0#0#0###0#0
+V7=src.Steuerung#src.TastaturManger#AssociationBidirectional####0#0#0###0#0
+V8=src.Steuerung#src.TimerAufruf#AssociationBidirectional####0#0#0###0#0
+
+[Interactive]
+I0=
+
