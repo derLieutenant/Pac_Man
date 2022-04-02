@@ -19,6 +19,10 @@ public class Oberflaeche {
 
     }
 
+    public void zeichneSpielfeldZelle(int i, int j, char symbol) {
+        spielFenseter.zeichneSpielfeldZelle(i, j, symbol);
+    }
+
     public void zeichnePacMan(int x, int y) {
         if (spielFenseter != null) {
             spielFenseter.zeichnePacMan(x, y);
