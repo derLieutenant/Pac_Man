@@ -36,6 +36,7 @@ public class Oberflaeche {
                 break;
             case 1:
                 spielFenseter = new SpielSzene("-PACMAN-", dieSteuerung, this);
+                dieSteuerung.starteSpiel();
                 break;
         }
 

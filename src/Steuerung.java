@@ -42,7 +42,9 @@ public class Steuerung {
 
         Date datum = new Date();
         aufgabe = new TimerAufruf(this);
-        timer.scheduleAtFixedRate(aufgabe, datum, SCHNELL); //Intervall ist in ms (0.001 sekunde)
+        timer.scheduleAtFixedRate(aufgabe, datum, LANGSAM); //Intervall ist in ms (0.001 sekunde)
+
+        //zeichneSpielfeld();
     }
 
     public void ladeLevel() {
