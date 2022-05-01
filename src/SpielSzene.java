@@ -15,6 +15,13 @@ public class SpielSzene extends Szene {
     protected final int BREITE = 19 * KAESTCHENGROESSE, HOEHE = 23 * KAESTCHENGROESSE + 32;     //extra Platz für Score
     //Spielfeld = 19 * 23 (mit äußerem Rand) ;
 
+    char[][] aktuellesSpielfeld = {
+            {'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},
+            {'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},
+            {'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},
+            {'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},
+            {'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'},{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'}};
+
     public SpielSzene(String derTitel, Steuerung dieSteuerung, Oberflaeche dieOberflaeche) {
         super(derTitel, dieSteuerung);
         this.dieOberflaeche = dieOberflaeche;
@@ -30,18 +37,13 @@ public class SpielSzene extends Szene {
         revalidate();
         this.setVisible(true);
 
-        dieSteuerung.starteSpiel();
     }
 
-    public void zeichneSpielfeldZelle(int i, int j, char symbol) {
-        int x = j * KAESTCHENGROESSE;       //wegen unlogischem Feldsystem entspricht i = y und j = x
-        int y = i * KAESTCHENGROESSE;
+    public void zeichneSpielfeld(char [][] spielfeld) {
+        aktuellesSpielfeld = spielfeld;
+        System.out.println("update");
 
-        switch (symbol) {           //TODO Spielfeld zeichnen
-            //case '#' ->;
-            //case '-' ->;
-            //default -> ;
-        }
+        repaint();
     }
 
     public void zeichnePacMan(int x, int y) {
@@ -60,4 +62,33 @@ public class SpielSzene extends Szene {
         revalidate();
     }
 
+    @Override
+    public void paint(Graphics g) {
+        System.out.println("paint");
+        g.setColor(Color.blue);
+        for (int i = 0; i < aktuellesSpielfeld.length; i++) {
+            for (int j = 0; j < aktuellesSpielfeld[0].length; j++) {
+                if (aktuellesSpielfeld[i][j] == '#') {
+                    g.fillRect(j * KAESTCHENGROESSE, (i+1) * KAESTCHENGROESSE, KAESTCHENGROESSE, KAESTCHENGROESSE);
+                }
+                else if (aktuellesSpielfeld[i][j] == 'C') {
+                    g.setColor(Color.yellow);
+                    g.fillRect(j * KAESTCHENGROESSE, (i+1) * KAESTCHENGROESSE, KAESTCHENGROESSE, KAESTCHENGROESSE);
+                    g.setColor(Color.blue);
+
+                    /*
+                    pacman.setLocation(KAESTCHENGROESSE*j, KAESTCHENGROESSE*i);
+                    BufferedImage bild = null;
+                    try {
+                        bild = ImageIO.read(new File("bilder/pacman1.png"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //pacman.setIcon(new ImageIcon(bild));
+                    pacman.revalidate();
+                    */
+                }
+            }
+        }
+    }
 }

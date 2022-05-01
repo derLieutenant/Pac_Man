@@ -3,9 +3,14 @@ package src;
 import src.Szene;
 import src.TastaturManger;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class MenuSzene extends Szene implements ActionListener {
 
@@ -26,16 +31,17 @@ public class MenuSzene extends Szene implements ActionListener {
     private void initialisiereButtons(){
         dieButtons[0] = new Button("Weiter");
         dieButtons[0].setBounds(50, 55, 400, 90);
-        dieButtons[0].setBackground(Color.CYAN);
+        dieButtons[0].setBackground(Color.blue);
         dieButtons[0].addActionListener(this);
         add(dieButtons[0]);
         dieButtons[0].setVisible(true);
         dieButtons[1] = new Button("Beende");
         dieButtons[1].setBounds(50, 155, 400, 90);
-        dieButtons[1].setBackground(Color.CYAN);
+        dieButtons[1].setBackground(Color.blue);
         dieButtons[1].addActionListener(this);
         add(dieButtons[1]);
         dieButtons[1].setVisible(true);
+
         /*
         dieButtons[2] = new Button();
         dieButtons[2].setBounds(50, 255, 400, 90);
@@ -55,5 +61,10 @@ public class MenuSzene extends Szene implements ActionListener {
         if(e.getSource().equals(dieButtons[1])) {
             dieOberflaeche.beende();
         }
+    }
+
+    @Override
+    public void paint(Graphics g) {
+
     }
 }

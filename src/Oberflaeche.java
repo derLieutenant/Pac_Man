@@ -13,20 +13,10 @@ public class Oberflaeche {
     public Oberflaeche(TastaturManger derTastaturmanager, Steuerung dieSteuerung) {
         this.dieSteuerung = dieSteuerung;
         this.derTastaturmanager = derTastaturmanager;
-        wechselSzene(0);
-
-
-
     }
 
-    public void zeichneSpielfeldZelle(int i, int j, char symbol) {
-        spielFenseter.zeichneSpielfeldZelle(i, j, symbol);
-    }
-
-    public void zeichnePacMan(int x, int y) {
-        if (spielFenseter != null) {
-            spielFenseter.zeichnePacMan(x, y);
-        }
+    public void zeichneSpielfeld(char[][] spielfeld) {
+        spielFenseter.zeichneSpielfeld(spielfeld);
     }
 
     public void wechselSzene(int neueSzene) {
