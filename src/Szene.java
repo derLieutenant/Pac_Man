@@ -1,6 +1,7 @@
 package src;
 
 
+import javax.swing.*;
 import java.awt.*;
 
 abstract class Szene extends Frame {
@@ -11,7 +12,7 @@ abstract class Szene extends Frame {
     public Szene(String derTitel, Steuerung dieSteuerung) {
         super(derTitel);
 
-        setBackground(Color.BLACK);
+        setBackground(Color.black);
         setResizable(false);
         addKeyListener(dieSteuerung.gibTastaturManager());
     }

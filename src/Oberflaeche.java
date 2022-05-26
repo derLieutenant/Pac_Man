@@ -32,6 +32,10 @@ public class Oberflaeche {
 
     }
 
+    public void setzePunkteAnzeige(int pPunkte) {
+        spielFenseter.setztePunkteAnzeige(pPunkte);
+    }
+
     public void beende() {
         menuFenster.dispose();
         if (spielFenseter != null) {

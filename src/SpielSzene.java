@@ -10,6 +10,7 @@ import java.io.IOException;
 public class SpielSzene extends Szene {
 
     private JLabel pacman;
+    private TextField punkteAnzeige;
 
     protected final int KAESTCHENGROESSE = 32;
     protected final int BREITE = 19 * KAESTCHENGROESSE, HOEHE = 23 * KAESTCHENGROESSE + 32;     //extra Platz für Score
@@ -27,16 +28,26 @@ public class SpielSzene extends Szene {
         this.dieOberflaeche = dieOberflaeche;
 
         setSize(BREITE, HOEHE);
-        setLocation(200, -31);
+        setBackground(Color.black);
+        setLocation(200, -32);
         setLayout(null);
 
+        punkteAnzeige = new TextField("0");
+        punkteAnzeige.setBounds(BREITE - 4*KAESTCHENGROESSE, HOEHE - KAESTCHENGROESSE, 3*KAESTCHENGROESSE, KAESTCHENGROESSE);
+        punkteAnzeige.setBackground(Color.black);
+        punkteAnzeige.setFocusable(false);
+        punkteAnzeige.setForeground(Color.blue);
+        add(punkteAnzeige);
+        punkteAnzeige.setVisible(true);
+
+        /*
         pacman = new JLabel(new ImageIcon("bilder/pacman1.png"));
         pacman.setBounds(0,0,32, 32);
         add(pacman);
         pacman.setVisible(true);
-        revalidate();
-        this.setVisible(true);
+                 */
 
+        setVisible(true);
     }
 
     public void zeichneSpielfeld(char [][] spielfeld) {
@@ -65,16 +76,21 @@ public class SpielSzene extends Szene {
     @Override
     public void paint(Graphics g) {
         System.out.println("paint");
-        g.setColor(Color.blue);
+
         for (int i = 0; i < aktuellesSpielfeld.length; i++) {
             for (int j = 0; j < aktuellesSpielfeld[0].length; j++) {
                 if (aktuellesSpielfeld[i][j] == '#') {
+                    g.setColor(Color.blue);
                     g.fillRect(j * KAESTCHENGROESSE, (i+1) * KAESTCHENGROESSE, KAESTCHENGROESSE, KAESTCHENGROESSE);
+                }
+                else if (aktuellesSpielfeld[i][j] == '*') {
+                    g.setColor(Color.white);
+                    g.fillOval(j * KAESTCHENGROESSE + KAESTCHENGROESSE * 3/8, (i+1) * KAESTCHENGROESSE + KAESTCHENGROESSE * 3/8,
+                            KAESTCHENGROESSE/4, KAESTCHENGROESSE/4);
                 }
                 else if (aktuellesSpielfeld[i][j] == 'C') {
                     g.setColor(Color.yellow);
-                    g.fillRect(j * KAESTCHENGROESSE, (i+1) * KAESTCHENGROESSE, KAESTCHENGROESSE, KAESTCHENGROESSE);
-                    g.setColor(Color.blue);
+                    g.fillOval(j * KAESTCHENGROESSE + 1, (i+1) * KAESTCHENGROESSE + 1, KAESTCHENGROESSE -2, KAESTCHENGROESSE - 2);
 
                     /*
                     pacman.setLocation(KAESTCHENGROESSE*j, KAESTCHENGROESSE*i);
@@ -90,5 +106,9 @@ public class SpielSzene extends Szene {
                 }
             }
         }
+    }
+
+    public void setztePunkteAnzeige(int pPunkte) {
+        punkteAnzeige.setText(pPunkte + "");
     }
 }

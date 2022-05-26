@@ -7,48 +7,7 @@ import java.util.Arrays;
 
 public class VirtuellesSpielfeld {
 
-    private char[][] spielfeld = new char[23][19];          //# = Wand; - = Blank; C = PacMan
-
-    public void bewegePacMan(char richtung) {
-
-        int[] posPacManAlt = findePacMan(), posPacManNeu;
-
-        switch (richtung) {
-            case 'O':
-                if (istKeineWand(posPacManAlt[0], posPacManAlt[1] - 1))
-                    posPacManNeu = new int[]{posPacManAlt[0], posPacManAlt[1] - 1};
-                else
-                    posPacManNeu = posPacManAlt;
-                break;
-            case 'R':
-                if (istKeineWand(posPacManAlt[0] + 1, posPacManAlt[1]))
-                    posPacManNeu = new int[]{posPacManAlt[0] + 1, posPacManAlt[1]};
-                else
-                    posPacManNeu = posPacManAlt;
-                break;
-            case 'U':
-                if (istKeineWand(posPacManAlt[0], posPacManAlt[1] + 1))
-                    posPacManNeu = new int[]{posPacManAlt[0], posPacManAlt[1] + 1};
-                else
-                    posPacManNeu = posPacManAlt;
-                break;
-            case 'L':
-                if (istKeineWand(posPacManAlt[0] - 1, posPacManAlt[1])) {
-                    posPacManNeu = new int[]{posPacManAlt[0] - 1, posPacManAlt[1]};
-                } else {
-                    posPacManNeu = posPacManAlt;
-                }
-                break;
-
-            default:
-                throw new IllegalStateException("unmoegliche Richtung: " + richtung);
-        }
-
-        System.out.println(posPacManNeu[1] + " | " + posPacManNeu[0]);
-        veraendereZelle(posPacManAlt[0], posPacManAlt[1], '-');
-        veraendereZelle(posPacManNeu[0], posPacManNeu[1], 'C');
-
-    }
+    private char[][] spielfeld = new char[22][19];          //# = Wand; - = Blank; C = PacMan
 
     public boolean istKeineWand(int x, int y) {
         if (spielfeld[y][x] == '#')
@@ -60,7 +19,7 @@ public class VirtuellesSpielfeld {
         spielfeld[y][x] = neu;
     }
 
-    private int[] findePacMan() {
+    public int[] findePacMan() {
         for (int i = 0; i < spielfeld.length; i++) {
             for (int j = 0; j < spielfeld[0].length; j++) {
                 if (spielfeld[i][j] == 'C')
@@ -98,4 +57,7 @@ public class VirtuellesSpielfeld {
         return spielfeld;
     }
 
+    public char gibZelle(int x, int y) {
+        return spielfeld[y][x];
+    }
 }
