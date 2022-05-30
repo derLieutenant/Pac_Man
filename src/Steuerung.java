@@ -6,14 +6,19 @@ import java.util.Timer;
 
 public class Steuerung {
 
+    Blinky blinky;
+    Pinky pinky;
+    PacMan pacman;
+
     private final Oberflaeche dieOberflaeche;
     private final TastaturManger derTastaturmanager;
     private final VirtuellesSpielfeld dasVirtuelleSpielfeld;
     private final Timer timer;
 
     private int punkte = 0;
-    private char pacManBewegungsRichtung = 'R';
     private int anzAktualisierungen = 0;
+
+    private boolean jageModus = true;
 
     public Steuerung() {
         new TimerAufruf(this);
@@ -21,56 +26,40 @@ public class Steuerung {
         derTastaturmanager = new TastaturManger(this);
         dieOberflaeche = new Oberflaeche(derTastaturmanager, this);
         dasVirtuelleSpielfeld = new VirtuellesSpielfeld();
-        dieOberflaeche.wechselSzene(0);
         dasVirtuelleSpielfeld.ladeLevel();
+
+        pacman = new PacMan(dasVirtuelleSpielfeld, this);
+        blinky = new Blinky(dasVirtuelleSpielfeld);
+        pinky = new Pinky(dasVirtuelleSpielfeld, pacman);
+
+        dieOberflaeche.wechselSzene(0);
     }
 
     public void aktualisieren() {
         anzAktualisierungen++;
-        bewegePacMan();
+
+        if (anzAktualisierungen % ((int) Math.floor(9 - ((double) anzAktualisierungen) / 900)) == 0)
+            bewegeGeister();
+        testeSpielende();                                            //Wir haben uns für diese Updateorder entschieden
+        if (anzAktualisierungen % 5 == 0)
+            pacman.bewege();
+
 
         dieOberflaeche.zeichneSpielfeld(dasVirtuelleSpielfeld.gibSpielfeld());
     }
 
-    public void bewegePacMan() {
-        int[] posPacManAlt = dasVirtuelleSpielfeld.findePacMan(), posPacManNeu;
-
-        switch (pacManBewegungsRichtung) {
-            case 'O':
-                if (dasVirtuelleSpielfeld.istKeineWand(posPacManAlt[0], posPacManAlt[1] - 1))
-                    posPacManNeu = new int[]{posPacManAlt[0], posPacManAlt[1] - 1};
-                else
-                    posPacManNeu = posPacManAlt;
-                break;
-            case 'R':
-                if (dasVirtuelleSpielfeld.istKeineWand(posPacManAlt[0] + 1, posPacManAlt[1]))
-                    posPacManNeu = new int[]{posPacManAlt[0] + 1, posPacManAlt[1]};
-                else
-                    posPacManNeu = posPacManAlt;
-                break;
-            case 'U':
-                if (dasVirtuelleSpielfeld.istKeineWand(posPacManAlt[0], posPacManAlt[1] + 1))
-                    posPacManNeu = new int[]{posPacManAlt[0], posPacManAlt[1] + 1};
-                else
-                    posPacManNeu = posPacManAlt;
-                break;
-            case 'L':
-                if (dasVirtuelleSpielfeld.istKeineWand(posPacManAlt[0] - 1, posPacManAlt[1])) {
-                    posPacManNeu = new int[]{posPacManAlt[0] - 1, posPacManAlt[1]};
-                } else {
-                    posPacManNeu = posPacManAlt;
-                }
-                break;
-            default:
-                throw new IllegalStateException("unmoegliche Richtung: " + pacManBewegungsRichtung);
+    private void bewegeGeister() {
+        if (jageModus) {
+            blinky.jagePacMan();
+            pinky.jagePacMan();
         }
+    }
 
-        System.out.println(posPacManNeu[1] + " | " + posPacManNeu[0]);
-        if (dasVirtuelleSpielfeld.gibZelle(posPacManNeu[0], posPacManNeu[1]) == '*') {
-            erhoehePunkte(1);
+    private void testeSpielende() {
+        if (dasVirtuelleSpielfeld.finde('<')[0] == -1 && dasVirtuelleSpielfeld.finde('<')[1] == -1) {
+            timer.cancel();
+            dieOberflaeche.wechselSzene(2);
         }
-        dasVirtuelleSpielfeld.veraendereZelle(posPacManAlt[0], posPacManAlt[1], '-');
-        dasVirtuelleSpielfeld.veraendereZelle(posPacManNeu[0], posPacManNeu[1], 'C');
     }
 
     public void erhoehePunkte(int extraPunkte) {
@@ -79,7 +68,17 @@ public class Steuerung {
     }
 
     public void starteSpiel() {
-        int ZEITLUPE = 2000, LANGSAM = 600, SCHNELL = 300;            //Geschwindigkeiten zum testen
+
+        int ZEITLUPE = 500, LANGSAM = 150, SCHNELL = 70;
+        /*
+        Geschwindigkeiten zum testen (PacMan bewegt sich jede 5 tiks)
+
+        Wegen einem zu ineffizienten paint kann nur jede 60 ms geupdated werden
+        Eventuell abhängig von der PC Performance
+        (Häufigeres Updaten würde mehr Geschwindigkeitsabstufungen ermöglichen)
+
+        Mit paint() muss nämlich der ganze Bildschirm neu gezeichnet werden
+         */
 
         Date datum = new Date();
         TimerAufruf aufgabe = new TimerAufruf(this);
@@ -89,14 +88,14 @@ public class Steuerung {
     }
 
     public void setzePacManBewegunsRichtung(char richtung) {
-        pacManBewegungsRichtung = richtung;
+        pacman.setzeBewegungsrichtung(richtung);
     }
 
     public void beende() {
         dieOberflaeche.beende();
     }
 
-    public KeyListener gibTastaturManager(){
+    public KeyListener gibTastaturManager() {
         return derTastaturmanager;
     }
 

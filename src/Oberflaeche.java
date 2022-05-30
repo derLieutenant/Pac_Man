@@ -6,9 +6,9 @@ public class Oberflaeche {
     private final TastaturManger derTastaturmanager;
     private final Steuerung dieSteuerung;
 
-    private Szene aktuelleSzene;
-    MenuSzene menuFenster;
-    SpielSzene spielFenseter;
+    private MenuSzene menuFenster;
+    private SpielSzene spielFenseter;
+    private GameOverSzene gameOverFenster;
 
     public Oberflaeche(TastaturManger derTastaturmanager, Steuerung dieSteuerung) {
         this.dieSteuerung = dieSteuerung;
@@ -28,6 +28,8 @@ public class Oberflaeche {
                 spielFenseter = new SpielSzene("-PACMAN-", dieSteuerung, this);
                 dieSteuerung.starteSpiel();
                 break;
+            case 2:
+                gameOverFenster = new GameOverSzene("-GAME OVER-", dieSteuerung, this);
         }
 
     }

@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class TastaturManger implements KeyListener {
 
-    private  Steuerung dieSteuerung;
+    private final Steuerung dieSteuerung;
 
     public TastaturManger(Steuerung dieSteuerung) {
         this.dieSteuerung = dieSteuerung;
@@ -16,7 +16,7 @@ public class TastaturManger implements KeyListener {
     public void keyPressed(KeyEvent e) {
         System.out.println(e.getKeyCode());
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_ESCAPE -> dieSteuerung.beende();       //das ist einfach nur eine andere Schreibweise für switch caseses (Lambda Schreibweise)
+            case KeyEvent.VK_ESCAPE -> dieSteuerung.beende();
             case KeyEvent.VK_W -> dieSteuerung.setzePacManBewegunsRichtung('O');
             case KeyEvent.VK_D -> dieSteuerung.setzePacManBewegunsRichtung('R');
             case KeyEvent.VK_S -> dieSteuerung.setzePacManBewegunsRichtung('U');

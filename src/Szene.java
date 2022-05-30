@@ -1,7 +1,5 @@
 package src;
 
-
-import javax.swing.*;
 import java.awt.*;
 
 abstract class Szene extends Frame {
@@ -9,8 +7,9 @@ abstract class Szene extends Frame {
 
     protected Oberflaeche dieOberflaeche;
 
-    public Szene(String derTitel, Steuerung dieSteuerung) {
+    public Szene(String derTitel, Steuerung dieSteuerung, Oberflaeche dieOberflaeche) {
         super(derTitel);
+        this.dieOberflaeche = dieOberflaeche;
 
         setBackground(Color.black);
         setResizable(false);

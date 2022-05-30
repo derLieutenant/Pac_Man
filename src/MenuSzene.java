@@ -1,16 +1,8 @@
 package src;
 
-import src.Szene;
-import src.TastaturManger;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class MenuSzene extends Szene implements ActionListener {
 
@@ -18,8 +10,7 @@ public class MenuSzene extends Szene implements ActionListener {
     protected Button[] dieButtons = new Button[3];
 
     public MenuSzene(String derTitel, Steuerung dieSteuerung, Oberflaeche dieOberflaeche) {
-        super(derTitel, dieSteuerung);
-        this.dieOberflaeche = dieOberflaeche;
+        super(derTitel, dieSteuerung, dieOberflaeche);
 
         setBounds(X, Y, BREITE, HOEHE);
         setLayout(null);

@@ -9,20 +9,21 @@ public class VirtuellesSpielfeld {
 
     private char[][] spielfeld = new char[22][19];          //# = Wand; - = Blank; C = PacMan
 
-    public boolean istKeineWand(int x, int y) {
+
+    public boolean istWand(int x, int y) {
         if (spielfeld[y][x] == '#')
-            return false;
-        return true;
+            return true;
+        return false;
     }
 
     public void veraendereZelle(int x, int y, char neu) {
         spielfeld[y][x] = neu;
     }
 
-    public int[] findePacMan() {
+    public int[] finde(char zeichen) {
         for (int i = 0; i < spielfeld.length; i++) {
             for (int j = 0; j < spielfeld[0].length; j++) {
-                if (spielfeld[i][j] == 'C')
+                if (spielfeld[i][j] == zeichen)
                     return new int[]{j, i};
             }
         }
